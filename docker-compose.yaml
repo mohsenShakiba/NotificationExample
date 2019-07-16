@@ -13,7 +13,8 @@ services:
       - "HEAP_NEWSIZE=128M"
     volumes:
       - /application/data/cassandra/:/var/lib/cassandra
-
+    networks:
+      - example.network
   push:
     build:
       context: .
