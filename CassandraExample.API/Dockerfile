@@ -1,4 +1,4 @@
-FROM dotnet:2.2-sdk AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
 COPY CassandraExample.API/*.csproj /CassandraExample.API/
 WORKDIR /CassandraExample.API
 RUN dotnet restore
@@ -7,7 +7,7 @@ WORKDIR /app/CassandraExample.API
 RUN mv appsettings.docker.json appsettings.json
 RUN dotnet publish -c Release -o /output
 
-FROM dotnet:2.2-aspnetcore-runtime AS final
+FROMmcr.microsoft.com/dotnet/core/runtime:2.2 AS final
 WORKDIR /app
 COPY --from=build /output .
 ENTRYPOINT ["dotnet", "CassandraExample.API.dll"]
