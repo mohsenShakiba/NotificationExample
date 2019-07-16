@@ -6,12 +6,15 @@
 
     <ItemGroup>
         <PackageReference Include="CassandraCSharpDriver" Version="3.10.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.2.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Data" />
-      <Folder Include="Mappings" />
       <Folder Include="Repositories" />
     </ItemGroup>
-    
+
+    <ItemGroup>
+      <ProjectReference Include="..\CassandraExample.Domain\CassandraExample.Domain.csproj" />
+    </ItemGroup>
+
 </Project>
