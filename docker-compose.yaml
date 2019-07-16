@@ -17,7 +17,7 @@ services:
   push:
     build:
       context: .
-      dockerfile: PushService.API/Dockerfile
+      dockerfile: CassandraExample.API/Dockerfile
     container_name: push
     restart: always
     depends_on:
@@ -30,7 +30,7 @@ services:
   identity:
     build:
       context: .
-      dockerfile: PushService.IdentityServer/Dockerfile
+      dockerfile: CassandraExample.IdentityServer/Dockerfile
     container_name: identity
     restart: always
     networks:
@@ -39,7 +39,7 @@ services:
   gateway:
     build:
       context: .
-      dockerfile: PushService.Gateway/Dockerfile
+      dockerfile: CassandraExample.Gateway/Dockerfile
     container_name: gateway
     restart: always
     ports:
