@@ -15,11 +15,11 @@ services:
       - /application/data/cassandra/:/var/lib/cassandra
     networks:
       - example.network
-  push:
+  notif:
     build:
       context: .
       dockerfile: CassandraExample.API/Dockerfile
-    container_name: push
+    container_name: notif
     restart: always
     depends_on:
       - cassandra
