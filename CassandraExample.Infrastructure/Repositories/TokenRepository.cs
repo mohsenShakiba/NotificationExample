@@ -19,7 +19,7 @@ namespace CassandraExample.Infrastructure.Repositories
 
 
         public async Task<IEnumerable<Token>> FindLatestAsync(int appId, string phoneNumber, int limit, float? ltVersion, float? gtVersion,
-            DeviceType? deviceType)
+            DeviceTypes? deviceTypes)
         {
             var table = await pushContext.TokenTable
                 .Where(t => t.UserPhoneNumber == phoneNumber && t.AppId == appId)

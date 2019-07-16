@@ -1,6 +1,6 @@
 namespace CassandraExample.Domain.AggregatesModel.TokenAggregate
 {
-    public enum DeviceType
+    public enum DeviceTypes
     {
         Android = 1,
         IOS = 2,

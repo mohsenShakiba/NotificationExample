@@ -18,7 +18,7 @@ namespace CassandraExample.Infrastructure.Mappings
                 .Column(t => t.Version, cm => cm.WithName("version"))
                 .Column(t => t.TokenString, cm => cm.WithName("t_string").WithDbType<string>())
                 .Column(t => t.AppId, cm => cm.WithName("app_id"))
-                .Column(t => t.DeviceType, cm => cm.WithName("type").WithDbType<int>());
+                .Column(t => t.DeviceTypes, cm => cm.WithName("type").WithDbType<int>());
 
             For<App>()
                 .TableName("apps")

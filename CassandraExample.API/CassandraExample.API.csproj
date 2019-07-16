@@ -6,16 +6,23 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="IdentityModel" Version="4.0.0-preview.2.33" />
         <PackageReference Include="Microsoft.AspNetCore.App" />
         <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+        <PackageReference Include="FirebaseAdmin" Version="1.6.0" />
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+        <PackageReference Include="MediatR" Version="7.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Application\ApiManagers" />
       <Folder Include="Application\Commands" />
       <Folder Include="Application\Queries" />
       <Folder Include="Controllers" />
-      <Folder Include="DTOs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\CassandraExample.Domain\CassandraExample.Domain.csproj" />
+      <ProjectReference Include="..\CassandraExample.Infrastructure\CassandraExample.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

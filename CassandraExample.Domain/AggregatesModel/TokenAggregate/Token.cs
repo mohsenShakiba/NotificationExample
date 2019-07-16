@@ -9,6 +9,11 @@ namespace CassandraExample.Domain.AggregatesModel.TokenAggregate
         public int AppId { get; set; }
         public float Version { get; set; }
         public string TokenString { get; set; }
-        public DeviceType DeviceType { get; set; }
+        public DeviceTypes DeviceTypes { get; set; }
+
+        public void UpdateId()
+        {
+            Id = TimeUuid.NewId();
+        }
     }
 }

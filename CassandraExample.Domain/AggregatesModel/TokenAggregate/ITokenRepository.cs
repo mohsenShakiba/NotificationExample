@@ -5,7 +5,7 @@ namespace CassandraExample.Domain.AggregatesModel.TokenAggregate
 {
     public interface ITokenRepository
     {
-        Task<IEnumerable<Token>> FindLatestAsync(int appId, string phoneNumber, int limit, float? ltVersion, float? gtVersion, DeviceType? deviceType);
+        Task<IEnumerable<Token>> FindLatestAsync(int appId, string phoneNumber, int limit, float? ltVersion, float? gtVersion, DeviceTypes? deviceTypes);
         Task<Token> FindAsync(string token, string phoneNumber);
         Task<IEnumerable<Token>> FindAllAsync(string phoneNumber);
         Task InsertAsync(Token token);

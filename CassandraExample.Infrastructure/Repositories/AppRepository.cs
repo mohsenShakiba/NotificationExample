@@ -14,7 +14,7 @@ namespace CassandraExample.Infrastructure.Repositories
             this.pushContext = pushContext;
         }
         
-        public async Task<App> FindByNameAsync(string name)
+        public async Task<App> FindAsync(string name)
         {
             return await pushContext.AppTable.FirstOrDefault(a => a.Name == name).ExecuteAsync();
         }

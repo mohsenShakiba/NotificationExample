@@ -5,6 +5,6 @@ namespace CassandraExample.Domain.AggregatesModel.AppAggregate
 {
     public interface IAppRepository: IRepository<App>
     {
-        Task<App> FindByNameAsync(string name);
+        Task<App> FindAsync(string name);
     }
 }
