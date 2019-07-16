@@ -27,14 +27,14 @@ services:
     networks:
       - example.network
 
-  identity:
-    build:
-      context: .
-      dockerfile: CassandraExample.IdentityServer/Dockerfile
-    container_name: identity
-    restart: always
-    networks:
-      - example.network
+#  identity:
+#    build:
+#      context: .
+#      dockerfile: CassandraExample.IdentityServer/Dockerfile
+#    container_name: identity
+#    restart: always
+#    networks:
+#      - example.network
 
   gateway:
     build:
