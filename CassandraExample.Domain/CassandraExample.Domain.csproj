@@ -5,10 +5,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Abstractions" />
-      <Folder Include="AggregatesModel" />
-      <Folder Include="DomainEvents" />
       <Folder Include="Exceptions" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="CassandraCSharpDriver" Version="3.10.0" />
     </ItemGroup>
 
 </Project>
