@@ -7,7 +7,7 @@ WORKDIR /app/CassandraExample.API
 RUN mv appsettings.docker.json appsettings.json
 RUN dotnet publish -c Release -o /output
 
-FROMmcr.microsoft.com/dotnet/core/runtime:2.2 AS final
+FROM mcr.microsoft.com/dotnet/core/runtime:2.2 AS final
 WORKDIR /app
 COPY --from=build /output .
 ENTRYPOINT ["dotnet", "CassandraExample.API.dll"]
