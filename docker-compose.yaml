@@ -36,16 +36,16 @@ services:
 #    networks:
 #      - example.network
 
-  gateway:
-    build:
-      context: .
-      dockerfile: CassandraExample.Gateway/Dockerfile
-    container_name: gateway
-    restart: always
-    ports:
-      - "8090:80"
-    networks:
-      - example.network
+#  gateway:
+#    build:
+#      context: .
+#      dockerfile: CassandraExample.Gateway/Dockerfile
+#    container_name: gateway
+#    restart: always
+#    ports:
+#      - "8090:80"
+#    networks:
+#      - example.network
 
 networks:
   example.network:
