@@ -3,7 +3,7 @@ version: '3.2'
 services:
 
   cassandra:
-    image: 5.9.211.60:5000/cassandra
+    image: cassandra
     container_name: cassandra
     restart: always
     ports:
