@@ -21,8 +21,7 @@ services:
     container_name: push
     restart: always
     depends_on:
-      - postgres
-      - rabbitmq
+      - cassandra
     ports:
       - "9091:80"
     networks:
