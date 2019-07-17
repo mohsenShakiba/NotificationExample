@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cassandra;
 using Cassandra.Data.Linq;
@@ -26,16 +27,17 @@ namespace CassandraExample.Infrastructure.Data
             
             var session = cluster.ConnectAndCreateDefaultKeyspaceIfNotExists(new Dictionary<string, string>(){{"class",  Cassandra.ReplicationStrategies.SimpleStrategy}, {"replication_factor", "1"}});
             Mapper = new Mapper(session);
-            Execute(session);
-            
+     
             TokenTable = new Table<Token>(session);
             TokenTable.CreateIfNotExists();
-            
+
             AppTable = new Table<App>(session);
             AppTable.CreateIfNotExists();
 
             NotificationTable = new Table<Notification>(session);
             NotificationTable.CreateIfNotExists();
+            
+            Execute(session);
         }
         
         void Execute(ISession session)

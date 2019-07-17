@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CassandraExample.API.Controllers
 {
-    [Authorize]
+//    [Authorize]
     [Route("api/v1/[controller]")]
     public class TokensController : Controller
     {
