@@ -1,7 +1,9 @@
 using System.Net.Http;
 using System.Threading.Tasks;
+using CassandraExample.API.Application.Commands;
 using CassandraExample.API.DTOs;
 using IdentityModel.Client;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -12,42 +14,21 @@ namespace CassandraExample.API.Controllers
     [Route("api/v1/[controller]")]
     public class AuthController : Controller
     {
-        private readonly IConfiguration configuration;
+        private readonly IMediator mediator;
 
-        public AuthController(IConfiguration configuration)
+        public AuthController(IMediator mediator)
         {
-            this.configuration = configuration;
+            this.mediator = mediator;
         }
 
         [HttpPost("token")]
-        public async Task<IActionResult> GetClient([FromBody] AuthDTO dto)
+        public async Task<IActionResult> GetToken([FromBody] LoginCommand command)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var client = new HttpClient();
-            var disco = await client.GetDiscoveryDocumentAsync(
-                new DiscoveryDocumentRequest
-                {
-                    Address = configuration.GetValue<string>("IdentityServerUrl"),
-                    Policy =
-                    {
-                        RequireHttps = false
-                    }
-                }
-            );
-            if (disco.IsError) return BadRequest(disco.Error);
-            var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
-            {
-                Address = disco.TokenEndpoint,
-                ClientId = dto.UserId,
-                ClientSecret = dto.Password,
-                Scope = "push"
-            });
+            if (!ModelState.IsValid)  return BadRequest(ModelState);
 
-            if (tokenResponse.IsError) return BadRequest(tokenResponse.ErrorDescription);
-            return Ok(tokenResponse.Json);
+            var result = await mediator.Send(command);
+            
+            return Ok(result);
         }
     }
 }

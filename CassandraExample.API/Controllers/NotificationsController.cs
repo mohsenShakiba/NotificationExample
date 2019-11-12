@@ -1,7 +1,7 @@
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using CassandraExample.API.Application.Commands;
 using CassandraExample.API.Application.Queries;
-using CassandraExample.API.DTOs;
 using CassandraExample.Domain.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CassandraExample.API.Controllers
 {
-//    [Authorize]
+    [Authorize]
     [Route("api/v1/[controller]")]
     public class NotificationsController : Controller
     {
@@ -21,18 +21,10 @@ namespace CassandraExample.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SendBatchNotification([FromBody] SendBatchNotificationDTO dto)
+        public async Task<IActionResult> SendBatchNotification([FromBody] SendNotificationCommand command)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            var command = new SendNotificationCommand
-            {
-                PhoneNumbers = dto.PhoneNumbers,
-                Title = dto.Title,
-                Message = dto.Message,
-                AppName = dto.AppName,
-                ProjectName = dto.ProjectName,
-                Filter = dto.Filter
-            };
+
             try
             {
                 await mediator.Send(command);
@@ -45,13 +37,17 @@ namespace CassandraExample.API.Controllers
         }
 
         [HttpGet("{appName}/{phoneNumber}")]
-        public async Task<IActionResult> GetNotifications([FromRoute] string appName, [FromRoute] string phoneNumber,
+        public async Task<IActionResult> GetNotifications([FromRoute, Required] string appName, [FromRoute, Required] string phoneNumber,
             int limit = 20, int offset = 0)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            
             var query = new UserNotificationsQuery
             {
                 PhoneNumber = phoneNumber,
-                AppName = appName
+                AppName = appName,
+                Limit = limit,
+                Offset = offset
             };
             try
             {

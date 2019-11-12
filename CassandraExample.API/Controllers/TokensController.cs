@@ -11,33 +11,23 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CassandraExample.API.Controllers
 {
-//    [Authorize]
+    [Authorize]
     [Route("api/v1/[controller]")]
     public class TokensController : Controller
     {
-        private readonly IAppRepository appRepository;
         private readonly IMediator mediator;
 
-        public TokensController(IMediator mediator, IAppRepository appRepository)
+        public TokensController(IMediator mediator)
         {
             this.mediator = mediator;
-            this.appRepository = appRepository;
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> AddToken([FromBody] RegisterTokenDTO dto)
+        public async Task<IActionResult> AddToken([FromBody] RegisterTokenCommand command)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            var command = new RegisterTokenCommand
-            {
-                PhoneNumber = dto.PhoneNumber,
-                AppName = dto.AppName,
-                ProjectName = dto.ProjectName,
-                Token = dto.Token,
-                Version = dto.Version,
-                DeviceTypes = dto.DeviceTypes
-            };
+            
             try
             {
                 await mediator.Send(command);
@@ -58,15 +48,10 @@ namespace CassandraExample.API.Controllers
             {
                 PhoneNumber = phoneNumber
             };
+            
             var tokens = await mediator.Send(query);
             return Ok(tokens);
         }
-
-        [HttpGet("app/{name}")]
-        public async Task<IActionResult> GetProject([Required] [FromRoute] string name)
-        {
-            var app = await appRepository.FindAsync(name);
-            return Ok(app);
-        }
+        
     }
 }
